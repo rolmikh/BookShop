@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Book_Shop_WPF.Models
+{
+    public partial class Warehouse
+    {
+        public int? IdWarehouse { get; set; }
+        public string NumberWarehouse { get; set; }
+        public string Address { get; set; }
+        public int? IsDeletedWarehouse { get; set; }
+
+    }
+}

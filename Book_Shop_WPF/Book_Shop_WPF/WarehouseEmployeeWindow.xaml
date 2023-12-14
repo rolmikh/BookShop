@@ -1,0 +1,457 @@
+﻿<Window x:Class="Book_Shop_WPF.WarehouseEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Book_Shop_WPF"
+        mc:Ignorable="d"
+                MinHeight="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeightKey}}" MinWidth="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}"
+
+        Title="Окно сотрудника склада" Closing="Window_Closing" Height="800" Width="1200"  WindowState="Maximized" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,1" EndPoint="0.9,1">
+                <GradientStop Color="#A93F55" Offset="1"></GradientStop>
+                <GradientStop Color="#F4AFB4" Offset="0"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <!--<Button x:Name="btCatalog" BorderBrush="#095256" Height="70" BorderThickness="2" VerticalAlignment="Top" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Width="300" HorizontalAlignment="Left" Content="Каталог" Margin="10" Background="#E2E8CE" Click="btCatalog_Click" ></Button>-->
+
+        <Grid>
+            <TabControl Margin="0,0,0,0" FontSize="35" Foreground="#6A0136" BorderBrush="#6A0136" Background="White" TabStripPlacement="Left">
+                <TabItem Height="80" Header="Категории товаров" Foreground="#6A0136" BorderBrush="#6A0136" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15*"></RowDefinition>
+                            <RowDefinition Height="108*"></RowDefinition>
+                            <RowDefinition Height="90*"></RowDefinition>
+                            <RowDefinition Height="72*"></RowDefinition>
+                            <RowDefinition Height="155*"></RowDefinition>
+                            <RowDefinition Height="63*"></RowDefinition>
+                            <RowDefinition Height="14*"></RowDefinition>
+                            <RowDefinition Height="109*"></RowDefinition>
+                            <RowDefinition Height="18*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock  Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="30"  Foreground="#6A0136" FontWeight="Medium" Grid.ColumnSpan="3" Height="40" Margin="35,0,35,0" >Категории</TextBlock>
+                        <DataGrid x:Name="dtCategory" BorderThickness="3" SelectionChanged="dtCategory_SelectionChanged" SelectionMode="Extended" FontSize="25" ItemsSource="{Binding DataSource}" SelectedValuePath="IdCategory" AutoGenerateColumns="False" Foreground="#6A0136" BorderBrush="#6A0136" HorizontalGridLinesBrush="#6A0136" VerticalGridLinesBrush="#6A0136" Background="White" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="3" Margin="35,13,35,0" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  Header="Название категории" Binding="{Binding NameCategory}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                        <TextBlock Grid.Row="5" FontSize="35" TextWrapping="Wrap"  Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="47" Margin="35,0,0,0">Название категории</TextBlock>
+                        <TextBox x:Name="tbCategory" Grid.Row="5" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Grid.Column="2" Margin="35,10,35,0" Grid.ColumnSpan="5"/>
+                        <Button x:Name="btNew" Grid.Row="7" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Click="btNew_Click" Grid.ColumnSpan="2" Margin="35,23,0,22"  >Добавить</Button>
+                        <Button x:Name="btUpdate" Grid.Row="7" Grid.Column="2" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Click="btUpdate_Click" Grid.ColumnSpan="3" Margin="35,23,35,22" >Изменить</Button>
+                        <Button x:Name="btDelete" Grid.Row="7" Grid.Column="5" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Click="btDelete_Click" Grid.ColumnSpan="2" Margin="0,23,35,22">Удалить</Button>
+                        <Button x:Name="btFillCategory" Grid.Row="1" Grid.Column="5" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Click="btFillCategory_Click" Grid.ColumnSpan="2" Margin="0,23,35,22" >Заполнить</Button>
+
+                    </Grid>
+
+                </TabItem>
+                <TabItem Height="80" Header="Товары" Foreground="#6A0136" BorderBrush="#6A0136" Background="White">
+                    <Grid>
+                        <Grid x:Name="gridMain" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15*"></RowDefinition>
+                                <RowDefinition Height="108*"></RowDefinition>
+                                <RowDefinition Height="90*"></RowDefinition>
+                                <RowDefinition Height="72*"></RowDefinition>
+                                <RowDefinition Height="155*"></RowDefinition>
+                                <RowDefinition Height="63*"></RowDefinition>
+                                <RowDefinition Height="109*"></RowDefinition>
+                                <RowDefinition Height="18*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock  Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="30"  Foreground="#6A0136" FontWeight="Medium" Grid.ColumnSpan="3" Height="40" Margin="35,0,35,0" >Товары</TextBlock>
+                            <DataGrid x:Name="dtProduct" BorderThickness="3" SelectionChanged="dtProduct_SelectionChanged" SelectionMode="Extended" FontSize="25" ItemsSource="{Binding DataSource}" SelectedValuePath="IdProduct" AutoGenerateColumns="False" Foreground="#6A0136" BorderBrush="#6A0136" HorizontalGridLinesBrush="#6A0136" VerticalGridLinesBrush="#6A0136" Background="White" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="3" Margin="35,13,35,0" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn  Header="Название книги" Binding="{Binding NameBook}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Автор" Binding="{Binding Author}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Количество" Binding="{Binding Count}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Артиккул товара" Binding="{Binding ArticleProduct}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Категория" Binding="{Binding Category}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Серия" Binding="{Binding Series}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Тип обложки" Binding="{Binding CoverType}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Год публикации" Binding="{Binding YearOfPublication}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Издательство" Binding="{Binding PublishingHouse}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Возрастное ограничение" Binding="{Binding AgeRestriction}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Количество страниц" Binding="{Binding NumberOfPages}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Стоимость" Binding="{Binding PriceBook}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Аннотация" Binding="{Binding Annotation}"></DataGridTextColumn>
+
+                                </DataGrid.Columns>
+
+                            </DataGrid>
+                            <Button x:Name="btNewProduct" Grid.Row="6" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Grid.ColumnSpan="2" Margin="35,23,0,22" Click="btNewProduct_Click" >Добавить</Button>
+                            <Button x:Name="btUpdateProduct" Grid.Row="6" Grid.Column="2" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE"  Grid.ColumnSpan="3" Margin="35,23,35,22" Click="btUpdateProduct_Click" >Изменить</Button>
+                            <Button x:Name="btDeleteProduct" Grid.Row="6" Grid.Column="5" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE"  Grid.ColumnSpan="2" Margin="0,23,35,22" Click="btDeleteProduct_Click">Удалить</Button>
+                            <Button x:Name="btFillProduct" Grid.Row="1" Grid.Column="5" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE"  Grid.ColumnSpan="2" Margin="0,23,35,22" Click="btFillProduct_Click">Заполнить</Button>
+
+                        </Grid>
+                        <Grid Visibility="Hidden" x:Name="gridNewUpdate">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"></ColumnDefinition>
+                                <ColumnDefinition Width="396*"></ColumnDefinition>
+                                <ColumnDefinition Width="14*"></ColumnDefinition>
+                                <ColumnDefinition Width="436*"></ColumnDefinition>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="15*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="1" Grid.Row="1"  FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Название" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbNameBook" Grid.Column="3" Grid.Row="1" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" MaxLength="30"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2"  FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Автор" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbAuthor" Grid.Column="3" Grid.Row="2" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" MaxLength="50"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3"  FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Количество" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbCount" Grid.Column="3" Grid.Row="3" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" PreviewTextInput="tbCount_PreviewTextInput"/>
+                            <TextBlock Grid.Column="1" Grid.Row="4"  FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Категория" Height="40"></TextBlock>
+                            <ComboBox   x:Name="cbCategory" Grid.Column="3" SelectedValuePath="IdCategory" DisplayMemberPath="NameCategory" Grid.Row="4" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" Loaded="cbCategory_Loaded"/>
+                            <TextBlock Grid.Column="1" Grid.Row="5"  FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Серия" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbSeries" Grid.Column="3" Grid.Row="5" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" MaxLength="50"/>
+                            <TextBox  Visibility="Hidden" x:Name="tbArticle" Grid.Column="3" Grid.Row="5" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" MaxLength="50"/>
+                            <TextBlock Grid.Column="1" Grid.Row="6"  FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Тип обложки" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbType" Grid.Column="3" Grid.Row="6" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" MaxLength="30"/>
+                            <TextBlock Grid.Column="1" Grid.Row="7"  FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Год публикации" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbYearPublish" Grid.Column="3" Grid.Row="7" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" MaxLength="4" PreviewTextInput="tbYearPublish_PreviewTextInput"/>
+                            <TextBlock Grid.Column="1" Grid.Row="8"  FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Издательство" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbHousePublish" Grid.Column="3" Grid.Row="8" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" MaxLength="20"/>
+                            <TextBlock Grid.Column="1" Grid.Row="9" FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Возрастное ограничение" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbAge" Grid.Column="3" Grid.Row="9" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" MaxLength="3" PreviewTextInput="tbAge_PreviewTextInput"/>
+                            <TextBlock Grid.Column="1" Grid.Row="10" FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Фото" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbPhoto" Grid.Column="3" Grid.Row="10" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" />
+                            <TextBlock Grid.Column="1" Grid.Row="11" FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Количество страниц" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbCountPage" Grid.Column="3" Grid.Row="11" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" PreviewTextInput="tbCountPage_PreviewTextInput"/>
+                            <TextBlock Grid.Column="1" Grid.Row="12" FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Стоимость" Height="40"></TextBlock>
+                            <TextBox    x:Name="tbPrice" Grid.Column="3" Grid.Row="12" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1" PreviewTextInput="tbPrice_PreviewTextInput"/>
+                            <TextBlock Grid.Column="1" Grid.Row="13" FontSize="27" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Margin="10" Text="Аннотация" Height="40"></TextBlock>
+                            <TextBox   x:Name="tbAnnotation" Grid.Column="3" Grid.Row="13" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="1,1,1,1"/>
+                            <Button x:Name="btNewProducts" Grid.Row="14" Grid.Column="1" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Margin="3 3 3 3" Background="#E2E8CE" Click="btNewProducts_Click">Добавить</Button>
+                            <Button x:Name="btUpdateProducts" Grid.Row="14" Grid.Column="3" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Margin="3 3 3 3" Background="#E2E8CE" Click="btUpdateProducts_Click">Изменить</Button>
+
+                        </Grid>
+                    </Grid>
+
+                </TabItem>
+                <TabItem Height="80" Header="Договоры" Foreground="#6A0136" BorderBrush="#6A0136" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="16*"></RowDefinition>
+                            <RowDefinition Height="115*"></RowDefinition>
+                            <RowDefinition Height="96*"></RowDefinition>
+                            <RowDefinition Height="77*"></RowDefinition>
+                            <RowDefinition Height="147*"></RowDefinition>
+                            <RowDefinition Height="86*"></RowDefinition>
+                            <RowDefinition Height="15*"></RowDefinition>
+                            <RowDefinition Height="116*"></RowDefinition>
+                            <RowDefinition Height="19*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock  Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="30"  Foreground="#6A0136" FontWeight="Medium" Height="40" Margin="10,0,9,0" >Договоры</TextBlock>
+                        <DataGrid x:Name="dtContract" BorderThickness="3"  SelectionChanged="dtContract_SelectionChanged" SelectionMode="Extended" FontSize="25" ItemsSource="{Binding DataSource}" SelectedValuePath="IdContract" AutoGenerateColumns="False" Foreground="#6A0136" BorderBrush="#6A0136" HorizontalGridLinesBrush="#6A0136" VerticalGridLinesBrush="#6A0136" Background="White" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="10,13,9,10" Grid.Column="1" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  Header="Номер договора" Binding="{Binding NumberContract}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="280" Header="Дата формирования" Binding="{Binding DateContract, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBlock Grid.Row="5" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="10,0,0,0" Grid.Column="1">Номер договора</TextBlock>
+                        <TextBox x:Name="tbNumberContract" MaxLength="6" Grid.Row="5" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Grid.Column="3" Margin="10,10,9,15" Grid.ColumnSpan="3" Grid.RowSpan="2" PreviewTextInput="tbNumberContract_PreviewTextInput"/>
+                        <TextBox x:Name="tbDateContract" Visibility="Hidden" Grid.Row="5" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Grid.Column="3" Margin="10,10,9,15" Grid.ColumnSpan="3" Grid.RowSpan="2" />
+                        <Button x:Name="btNewContract" Grid.Row="7" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,23,0,22" Click="btNewContract_Click" Grid.Column="1" >Добавить</Button>
+                        <Button x:Name="btUpdateContract" Grid.Row="7" Grid.Column="3" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,23,9,22" Click="btUpdateContract_Click" >Изменить</Button>
+                        <Button x:Name="btDeleteContract" Grid.Row="7" Grid.Column="5" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,23,9,22" Click="btDeleteContract_Click">Удалить</Button>
+                        <Button x:Name="btFillContract" Grid.Row="1" Grid.Column="5" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,23,9,22" Click="btFillContract_Click">Заполнить</Button>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Height="80" Header="Накладные" Foreground="#6A0136" BorderBrush="#6A0136" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="17*"></RowDefinition>
+                            <RowDefinition Height="109*"></RowDefinition>
+                            <RowDefinition Height="136*"></RowDefinition>
+                            <RowDefinition Height="88*"></RowDefinition>
+                            <RowDefinition Height="69*"></RowDefinition>
+                            <RowDefinition Height="87*"></RowDefinition>
+                            <RowDefinition Height="87*"></RowDefinition>
+                            <RowDefinition Height="72*"></RowDefinition>
+                            <RowDefinition Height="22*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock  Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="30"  Foreground="#6A0136" FontWeight="Medium" Height="40" Margin="10,0,9,0" >Накладные</TextBlock>
+                        <DataGrid x:Name="dtDeliveryNote" BorderThickness="3"  SelectionChanged="dtDeliveryNote_SelectionChanged" SelectionMode="Extended" FontSize="25" ItemsSource="{Binding DataSource}" SelectedValuePath="IdDeliveryNote" AutoGenerateColumns="False" Foreground="#6A0136" BorderBrush="#6A0136" HorizontalGridLinesBrush="#6A0136" VerticalGridLinesBrush="#6A0136" Background="White" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="10,13,9,10" Grid.Column="1" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  Header="Номер накладной" Binding="{Binding NumberDeliveryNote}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Дата формирования" Binding="{Binding DateDeliveryNote, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="Номер договора" Binding="{Binding NumberContract}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Дата формирования" Binding="{Binding DateContract, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBlock Grid.Row="5" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="25,0,10,0" Grid.ColumnSpan="3">Номер накладной</TextBlock>
+                        <TextBox x:Name="tbNumberDeliveryNote" MaxLength="6" Grid.Row="5" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Grid.Column="3" Margin="10,10,9,10" Grid.ColumnSpan="3" PreviewTextInput="tbNumberDeliveryNote_PreviewTextInput"/>
+                        <TextBlock Grid.Row="6" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="25,0,10,0" Grid.ColumnSpan="2">Договор</TextBlock>
+                        <ComboBox x:Name="cbContract" Grid.Row="6" SelectedValuePath="IdContract" DisplayMemberPath="NumberContract" Loaded="cbContract_Loaded" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Grid.Column="3" Margin="10,10,9,10" Grid.ColumnSpan="3"/>
+                        <TextBox x:Name="tbDateDeliveryNote" Visibility="Hidden" Grid.Row="5" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Grid.Column="3" Margin="10,10,9,10" Grid.ColumnSpan="3" />
+                        <Button x:Name="btNewDeliveryNote" Grid.Row="7" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,9,0,11"  Grid.Column="1" Click="btNewDeliveryNote_Click">Добавить</Button>
+                        <Button x:Name="btUpdateDeliveryNote" Grid.Row="7" Grid.Column="3" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,9,9,11" Click="btUpdateDeliveryNote_Click" >Изменить</Button>
+                        <Button x:Name="btDeleteDeliveryNote" Grid.Row="7" Grid.Column="5" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,9,9,11" Click="btDeleteDeliveryNote_Click">Удалить</Button>
+                        <Button x:Name="btFillDeliveryNote" Grid.Row="1" Grid.Column="5" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,23,9,22" Click="btFillDeliveryNote_Click">Заполнить</Button>
+
+                    </Grid>
+
+                </TabItem>
+                <TabItem Height="80" Header="Поставки" Foreground="#6A0136" BorderBrush="#6A0136" Background="White">
+                    <Grid>
+                        <Grid x:Name="gridMainSupply" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="17*"></RowDefinition>
+                                <RowDefinition Height="109*"></RowDefinition>
+                                <RowDefinition Height="136*"></RowDefinition>
+                                <RowDefinition Height="88*"></RowDefinition>
+                                <RowDefinition Height="69*"></RowDefinition>
+                                <RowDefinition Height="87*"></RowDefinition>
+                                <RowDefinition Height="87*"></RowDefinition>
+                                <RowDefinition Height="72*"></RowDefinition>
+                                <RowDefinition Height="22*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock  Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="30"  Foreground="#6A0136" FontWeight="Medium" Height="40" Margin="10,0,9,0" >Поставки</TextBlock>
+                            <DataGrid x:Name="dtSupply" BorderThickness="3"  SelectionChanged="dtSupply_SelectionChanged" SelectionMode="Extended" FontSize="25" ItemsSource="{Binding DataSource}" SelectedValuePath="IdSupply" AutoGenerateColumns="False" Foreground="#6A0136" BorderBrush="#6A0136" HorizontalGridLinesBrush="#6A0136" VerticalGridLinesBrush="#6A0136" Background="White" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="10,13,9,10" Grid.Column="1" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn  Header="Номер поставки" Binding="{Binding NumberSupply}"></DataGridTextColumn>
+                                    <DataGridTextColumn Width="250" Header="Дата поставки" Binding="{Binding DateSupply, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Номер склада" Binding="{Binding NumberWarehouse}"></DataGridTextColumn>
+                                    <DataGridTextColumn Width="250" Header="Адрес склада" Binding="{Binding Address}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Номер накладной" Binding="{Binding NumberDeliveryNote}"></DataGridTextColumn>
+                                    <DataGridTextColumn Width="250" Header="Дата формирования" Binding="{Binding DateDeliveryNote, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Номер договора" Binding="{Binding NumberContract}"></DataGridTextColumn>
+                                    <DataGridTextColumn Width="250" Header="Дата формирования" Binding="{Binding DateContract, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button x:Name="btNewSupply" Grid.Row="7" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,9,0,11"  Grid.Column="1" Click="btNewSupply_Click">Добавить</Button>
+                            <Button x:Name="btUpdateSupply" Grid.Row="7" Grid.Column="3" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,9,9,11" Click="btUpdateSupply_Click" >Изменить</Button>
+                            <Button x:Name="btDeleteSupply" Grid.Row="7" Grid.Column="5" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,9,9,11" Click="btDeleteSupply_Click" >Удалить</Button>
+                            <Button x:Name="btFillSupply" Grid.Row="1" Grid.Column="5" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,23,9,22" Click="btFillSupply_Click">Заполнить</Button>
+
+                        </Grid>
+                        <Grid  x:Name="gridSupply" Visibility="Hidden">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="23*"></ColumnDefinition>
+                                <ColumnDefinition Width="355*"></ColumnDefinition>
+                                <ColumnDefinition Width="31*"></ColumnDefinition>
+                                <ColumnDefinition Width="432*"></ColumnDefinition>
+                                <ColumnDefinition Width="21*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="20*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="2,0,10,0">Номер поставки</TextBlock>
+                            <TextBox x:Name="tbNumberSupply" MaxLength="6" Grid.Row="1" Grid.Column="3" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="10,30,10,30" PreviewTextInput="tbNumberSupply_PreviewTextInput"  />
+                            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="2,0,10,0" >Дата поставки</TextBlock>
+                            <DatePicker x:Name="dpSuplly"  Grid.Row="2" Grid.Column="3" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3"  Margin="10,30,10,30" />
+                            <TextBlock Grid.Row="3" Grid.Column="1" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="2,0,10,0">Номер накладной</TextBlock>
+                            <ComboBox x:Name="cbDeliveryNote" Grid.Row="3" Grid.Column="3" SelectedValuePath="IdDeliveryNote" DisplayMemberPath="NumberDeliveryNote"  FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="10,30,10,30" Loaded="cbDeliveryNote_Loaded" />
+                            <TextBlock Grid.Row="4" Grid.Column="1" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="2,0,10,0">Номер склада</TextBlock>
+                            <ComboBox x:Name="cbWarehouse" Grid.Row="4" Grid.Column="3" SelectedValuePath="IdWarehouse" DisplayMemberPath="NumberWarehouse"  FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="10,30,10,30" Loaded="cbWarehouse_Loaded"/>
+                            <Button x:Name="btNewSupplies" Grid.Row="5" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,30,10,30"  Grid.Column="1" Click="btNewSupplies_Click">Добавить</Button>
+                            <Button x:Name="btUpdateSupplies" Grid.Row="5" Grid.Column="3" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,30,10,30" Click="btUpdateSupplies_Click">Изменить</Button>
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Height="80" Header="Состав поставок" Foreground="#6A0136" BorderBrush="#6A0136" Background="White">
+
+                    <Grid>
+                        <Grid x:Name="gridMainSupplyComposition" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                                <ColumnDefinition Width="300*"></ColumnDefinition>
+                                <ColumnDefinition Width="30*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="17*"></RowDefinition>
+                                <RowDefinition Height="109*"></RowDefinition>
+                                <RowDefinition Height="136*"></RowDefinition>
+                                <RowDefinition Height="88*"></RowDefinition>
+                                <RowDefinition Height="69*"></RowDefinition>
+                                <RowDefinition Height="87*"></RowDefinition>
+                                <RowDefinition Height="87*"></RowDefinition>
+                                <RowDefinition Height="72*"></RowDefinition>
+                                <RowDefinition Height="22*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock  Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="30"  Foreground="#6A0136" FontWeight="Medium" Height="40" Margin="10,0,9,0" >Состав поставки</TextBlock>
+                            <DataGrid x:Name="dtSupplyComposition" BorderThickness="3"  SelectionChanged="dtSupplyComposition_SelectionChanged" SelectionMode="Extended" FontSize="25" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" Foreground="#6A0136" BorderBrush="#6A0136" HorizontalGridLinesBrush="#6A0136" VerticalGridLinesBrush="#6A0136" Background="White" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="10,13,9,10" Grid.Column="1" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn  Header="Название товара" Binding="{Binding НазваниеТовара}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Номер поставки" Binding="{Binding НомерПоставки}"></DataGridTextColumn>
+                                    <DataGridTextColumn Width="250" Header="Дата поставки" Binding="{Binding ДатаПоставки, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                                    <DataGridTextColumn Width="250" Header="Количество товара" Binding="{Binding КоличествоПоставки}"></DataGridTextColumn>
+                                    <DataGridTextColumn  Header="Стоимость товара" Binding="{Binding СтоимостьПоставки}"></DataGridTextColumn>
+                                   </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button x:Name="btNewSupplyComposition" Grid.Row="7" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,9,0,11"  Grid.Column="1" Click="btNewSupplyComposition_Click">Добавить</Button>
+                            <Button x:Name="btUpdateSupplyComposition" Grid.Row="7" Grid.Column="3" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,9,9,11" Click="btUpdateSupplyComposition_Click" >Изменить</Button>
+                            <Button x:Name="btDeleteSupplyComposition" Grid.Row="7" Grid.Column="5" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,9,9,11" Click="btDeleteSupplyComposition_Click" >Удалить</Button>
+                            <Button x:Name="btFillSupplyComposition" Grid.Row="1" Grid.Column="5" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,23,9,22" Click="btFillSupplyComposition_Click">Заполнить</Button>
+
+                        </Grid>
+                        <Grid  x:Name="gridSupplyComposition" Visibility="Hidden">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="23*"></ColumnDefinition>
+                                <ColumnDefinition Width="355*"></ColumnDefinition>
+                                <ColumnDefinition Width="31*"></ColumnDefinition>
+                                <ColumnDefinition Width="432*"></ColumnDefinition>
+                                <ColumnDefinition Width="21*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="70*"></RowDefinition>
+                                <RowDefinition Height="20*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="2,0,10,0">Название товара</TextBlock>
+                            <ComboBox x:Name="cbNameProductSupply" Grid.Row="1" SelectedValuePath="IdProduct" DisplayMemberPath="NameBook" Grid.Column="3" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="10,30,10,30" Loaded="cbNameProductSupply_Loaded" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="2,0,10,0" >Номер поставки</TextBlock>
+                            <ComboBox x:Name="cbNumberSupply"  Grid.Row="2" SelectedValuePath="IdSupply" DisplayMemberPath="NumberSupply" Grid.Column="3" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3"  Margin="10,30,10,30" Loaded="cpNumberSupply_Loaded"/>
+                           <TextBlock Grid.Row="3" Grid.Column="1" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="2,0,10,0">Количество товаров</TextBlock>
+                            <TextBox x:Name="tbCountSupply" Grid.Row="3" Grid.Column="3"  FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="10,30,10,30" PreviewTextInput="tbCountSupply_PreviewTextInput" />
+                            <TextBlock Grid.Row="4" Grid.Column="1" FontSize="30" TextWrapping="Wrap" Foreground="#6A0136" FontWeight="Medium" VerticalAlignment="Center" Height="70" Margin="2,0,10,0">Стоимость товара</TextBlock>
+                            <TextBox x:Name="tbPriceSupply" Grid.Row="4" Grid.Column="3" FontSize="25" BorderBrush="#407899" Foreground="#407899" BorderThickness="3" Margin="10,30,10,30" PreviewTextInput="tbPriceSupply_PreviewTextInput"/>
+                            <Button x:Name="btNewSupplyCompositions" Grid.Row="6" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,30,10,30"  Grid.Column="1" Click="btNewSupplyCompositions_Click">Добавить</Button>
+                            <Button x:Name="btUpdateSupplyCompositions" Grid.Row="6" Grid.Column="3" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="10,30,10,30" Click="btUpdateSupplyCompositions_Click">Изменить</Button>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Height="80" Header="Склады" Foreground="#6A0136" BorderBrush="#6A0136" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="300*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="17*"></RowDefinition>
+                            <RowDefinition Height="109*"></RowDefinition>
+                            <RowDefinition Height="136*"></RowDefinition>
+                            <RowDefinition Height="88*"></RowDefinition>
+                            <RowDefinition Height="69*"></RowDefinition>
+                            <RowDefinition Height="87*"></RowDefinition>
+                            <RowDefinition Height="87*"></RowDefinition>
+                            <RowDefinition Height="72*"></RowDefinition>
+                            <RowDefinition Height="22*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock  Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="30"  Foreground="#6A0136" FontWeight="Medium" Height="40" Margin="10,0,9,0" >Склады</TextBlock>
+                        <DataGrid x:Name="dtWarehouse" BorderThickness="3"  SelectionChanged="dtWarehouse_SelectionChanged" SelectionMode="Extended" FontSize="25" ItemsSource="{Binding DataSource}" SelectedValuePath="IdWarehouse" AutoGenerateColumns="False" Foreground="#6A0136" BorderBrush="#6A0136" HorizontalGridLinesBrush="#6A0136" VerticalGridLinesBrush="#6A0136" Background="White" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="10,13,9,10" Grid.Column="1" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  Header="Номер склада" Binding="{Binding NumberWarehouse}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Адрес склада" Binding="{Binding Address}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="btFillWarehouse" Grid.Row="1" Grid.Column="5" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,23,9,22" Click="btFillWarehouse_Click">Заполнить</Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Height="80" Header="Просмотр поставок" Foreground="#6A0136" BorderBrush="#6A0136" Background="White">
+                    <Grid>
+                        <DataGrid x:Name="dtSupplyView" BorderThickness="3" SelectionChanged="dtSupplyView_SelectionChanged" SelectionMode="Extended" FontSize="25" ItemsSource="{Binding DataSource}"  AutoGenerateColumns="False" Foreground="#6A0136" BorderBrush="#6A0136" HorizontalGridLinesBrush="#6A0136" VerticalGridLinesBrush="#6A0136" Background="White" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="10,139,9,10" Grid.Column="1" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn  Header="Номер поставки" Binding="{Binding НомерПоставки}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Дата поставки" Binding="{Binding ДатаПоставки, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="Номер договора" Binding="{Binding НомерДоговора}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Дата подписания" Binding="{Binding ДатаПодписания, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="Номер накладной" Binding="{Binding НомерНакладной}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Дата накладной" Binding="{Binding ДатаНакладной, StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="Номер склада" Binding="{Binding НомерСклада}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Адрес склада" Binding="{Binding АдресСклада}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Название книги" Binding="{Binding НазваниеКниги}"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="Количество поставки" Binding="{Binding КоличествоПоставки}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Закупочная цена" Binding="{Binding ЗакупочнаяЦена}"></DataGridTextColumn>
+                                <DataGridTextColumn  Header="Отпускная цена" Binding="{Binding ОтпускнаяЦена}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="250" Header="Артикул товара" Binding="{Binding АртикулТовара}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="btFillView" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="35" Foreground="#6A0136" Background="#E2E8CE" Margin="0,23,40,22" Height="80" Width="200" HorizontalAlignment="Right" VerticalAlignment="Top" Click="btFillView_Click">Заполнить</Button>
+                    </Grid>
+                    </TabItem>
+            </TabControl>
+        </Grid>
+
+    </Grid>
+</Window>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book_Shop_WPF", "Book_Shop_WPF\Book_Shop_WPF.csproj", "{C11FF809-9425-4E89-B8E3-51AC553EA306}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestPassword", "UnitTestPassword\UnitTestPassword.csproj", "{5537EE5A-67ED-4F62-9E83-CCE6DE05676F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C11FF809-9425-4E89-B8E3-51AC553EA306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11FF809-9425-4E89-B8E3-51AC553EA306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11FF809-9425-4E89-B8E3-51AC553EA306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11FF809-9425-4E89-B8E3-51AC553EA306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5537EE5A-67ED-4F62-9E83-CCE6DE05676F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5537EE5A-67ED-4F62-9E83-CCE6DE05676F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5537EE5A-67ED-4F62-9E83-CCE6DE05676F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5537EE5A-67ED-4F62-9E83-CCE6DE05676F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23921494-6B03-4496-AED4-072C5D8207D6}
+	EndGlobalSection
+EndGlobal

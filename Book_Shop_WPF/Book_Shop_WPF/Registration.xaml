@@ -1,0 +1,98 @@
+﻿<Window x:Class="Book_Shop_WPF.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Book_Shop_WPF"
+        mc:Ignorable="d"
+                MinHeight="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeightKey}}" MinWidth="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}"
+
+        Title="Регистрация" Height="800" Width="1200" Closing="Window_Closing" WindowState="Maximized" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,1" EndPoint="0.9,1">
+                <GradientStop Color="#A93F55" Offset="1"></GradientStop>
+                <GradientStop Color="#F4AFB4" Offset="0"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid Height="672"  Background="#E2E8CE" VerticalAlignment="Top">
+            <Grid Margin="0,0,0,567">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="185*"></ColumnDefinition>
+                    <ColumnDefinition Width="221*"></ColumnDefinition>
+                    <ColumnDefinition Width="185*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="19*"></RowDefinition>
+                    <RowDefinition Height="58*"></RowDefinition>
+                    <RowDefinition Height="19*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button x:Name="btAutorization" Grid.Column="2" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="25" Foreground="#6A0136" Background="#F4AFB4" ToolTip="Нажмите для возвращения к авторизации" Click="btAutorization_Click" Content="Авторизация" Grid.Row="1"/>
+                <TextBlock Text="Регистрация" Grid.Column="1" Grid.Row="1" FontFamily="Sylfaen"  TextAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#6A0136"/>
+            </Grid>
+            <Grid Margin="0,70,0,62">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="29*"></RowDefinition>
+                    <RowDefinition Height="57*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="57*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="57*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="57*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="57*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="57*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="57*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="57*"></RowDefinition>
+                    <RowDefinition Height="29*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="64*"></ColumnDefinition>
+                    <ColumnDefinition Width="463*"></ColumnDefinition>
+                    <ColumnDefinition Width="145*"></ColumnDefinition>
+                    <ColumnDefinition Width="463*"></ColumnDefinition>
+                    <ColumnDefinition Width="64*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Введите фамилию" Grid.Column="1" Grid.Row="1" FontFamily="Sylfaen" TextAlignment="Left" FontSize="30" Foreground="#6A0136"/>
+                <TextBox x:Name="tbSurname"  BorderBrush="#095256" BorderThickness="2" Grid.Column="3" Grid.Row="1" FontFamily="Sylfaen" FontSize="30" ToolTip="Поле для ввода фамилии" Foreground="#6A0136"/>
+                <TextBlock Text="Введите имя" Grid.Column="1" Grid.Row="3" FontFamily="Sylfaen"  TextAlignment="Left" FontSize="30" Foreground="#6A0136"/>
+                <TextBox x:Name="tbName" BorderBrush="#095256" Grid.Column="3" Grid.Row="3" BorderThickness="2" FontFamily="Sylfaen" FontSize="30" ToolTip="Поле для ввода имени" Foreground="#6A0136"/>
+                <TextBlock Text="Введите отчество (при наличии)" Grid.Column="1" Grid.Row="5" FontFamily="Sylfaen" TextAlignment="Left" FontSize="30" Foreground="#6A0136"/>
+                <TextBox x:Name="tbMiddleName" BorderBrush="#095256" Grid.Column="3" Grid.Row="5" BorderThickness="2" FontFamily="Sylfaen" FontSize="30" ToolTip="Поле для ввода отчества" Foreground="#6A0136"/>
+                <TextBlock Text="Введите электронную почту" Grid.Column="1" Grid.Row="7" FontFamily="Sylfaen" TextAlignment="Left" FontSize="30" Foreground="#6A0136"/>
+                <TextBox x:Name="tbEmail" BorderBrush="#095256" Grid.Column="3" Grid.Row="7" BorderThickness="2" FontFamily="Sylfaen" FontSize="30" ToolTip="Поле для ввода логина" Foreground="#6A0136"/>
+                <TextBlock Text="Введите пароль" Grid.Column="1" Grid.Row="9" FontFamily="Sylfaen" TextAlignment="Left" FontSize="30" Foreground="#6A0136"/>
+                <TextBox x:Name="tbPassword" BorderBrush="#095256" Grid.Column="3" Grid.Row="9" FontSize="30" BorderThickness="2" FontFamily="Sylfaen" ToolTip="Поле для ввода пароля" Foreground="#6A0136"/>
+                <TextBlock Text="Введите дату рождения" Grid.Column="1" Grid.Row="11" FontFamily="Sylfaen" TextAlignment="Left" FontSize="30" Foreground="#6A0136"/>
+                <DatePicker x:Name="dtDateBirth" BorderBrush="#095256" Grid.Column="3" Grid.Row="11" BorderThickness="2" FontFamily="Sylfaen" FontSize="30" ToolTip="Поле для ввода даты рождения" Foreground="#6A0136"/>
+
+            </Grid>
+            <Grid Margin="0,494,0,62">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="268*"></ColumnDefinition>
+                    <ColumnDefinition Width="673*"></ColumnDefinition>
+                    <ColumnDefinition Width="268*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="19*"></RowDefinition>
+                    <RowDefinition Height="58*"></RowDefinition>
+                    <RowDefinition Height="19*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button x:Name="btRegistration" BorderBrush="#095256" BorderThickness="2" ToolTip="Нажмите для регистрации" Grid.Row="1" FontFamily="Sylfaen" FontSize="25" Foreground="#6A0136" Background="#F4AFB4" Content="Регистрация" Grid.ColumnSpan="3" Margin="266,0,266,0" Click="btRegistration_Click" />
+
+            </Grid>
+
+
+
+
+        </Grid>
+
+    </Grid>
+</Window>

@@ -1,0 +1,101 @@
+﻿<Window x:Class="Book_Shop_WPF.BasketWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Book_Shop_WPF"
+        mc:Ignorable="d"
+                MinHeight="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeightKey}}" MinWidth="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}"
+
+       Title="Корзина" Height="800" Closing="Window_Closing" Width="1200"  WindowState="Maximized" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,1" EndPoint="0.9,1">
+                <GradientStop Color="#A93F55" Offset="1"></GradientStop>
+                <GradientStop Color="#F4AFB4" Offset="0"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid Margin="0,0,0,812">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="221*"></ColumnDefinition>
+                <ColumnDefinition Width="189*"></ColumnDefinition>
+                <ColumnDefinition Width="190*"></ColumnDefinition>
+                <ColumnDefinition Width="202*"></ColumnDefinition>
+                <ColumnDefinition Width="202*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btCatalog" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="25" Foreground="#6A0136" Background="#E2E8CE" Content="Каталог" Height="60"  Width="200"  Grid.Column="3" Margin="10" Click="btCatalog_Click"/>
+            <Button x:Name="btLichKab" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="25" Foreground="#6A0136" Background="#E2E8CE" Content="Личный кабинет" Height="60" Width="200" Grid.Column="4" Margin="10" Click="btLichKab_Click"/>
+            <TextBlock Text="Корзина" FontFamily="Sylfaen" FontWeight="Black" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="35"  Foreground="#6A0136"  Height="50" Width="300" TextWrapping="Wrap" Grid.Column="2" ></TextBlock>
+
+            <Button  x:Name="btNazad" BorderBrush="#095256" BorderThickness="2"  FontFamily="Sylfaen" FontSize="30" Foreground="#6A0136" Background="#E2E8CE" Content="Назад" Height="60" Width="200" Margin="10" HorizontalAlignment="Center" Grid.Column="0" Click="btNazad_Click"/>
+
+        </Grid>
+
+        <ScrollViewer Margin="0,104,0,113">
+            <Grid>
+
+                <ItemsControl ItemsSource="{Binding Baskets}" x:Name="BasketListView" BorderThickness="2" Margin="0,0,0,10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel>
+                                    <Border Height="300" ToolTip="{Binding NameBook}">
+                                        <StackPanel  ToolTip="{Binding NameBook}" Orientation="Horizontal">
+                                            <Border x:Name="imClick" Height="260" Width="200"  BorderThickness="15" Margin="20 0 0 0"  ToolTip="{Binding NameBook}" BorderBrush="#E2E8CE" >
+                                                <Border.Background>
+                                                    <ImageBrush  ImageSource="{Binding PhotoBook}"></ImageBrush>
+                                                </Border.Background>
+                                            </Border>
+                                            <TextBlock FontFamily="Sylfaen" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"  FontSize="25" Foreground="#6A0136" Height="80" Width="250" Margin="10 0 0 0"  Text="{Binding NameBook}" ></TextBlock>
+                                            <TextBlock FontFamily="Sylfaen" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center" FontSize="25" Foreground="#6A0136" Height="80" Width="250" Margin="10 0 0 0"  Text="{Binding Author}"></TextBlock>
+                                            <TextBlock FontFamily="Sylfaen" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Right" FontSize="25" Foreground="#6A0136"  Height="80" Width="150" Margin="10 0 0 0" Text="{Binding PriceBook, StringFormat={}{0} ₽ /шт}"></TextBlock>
+
+                                            <Button x:Name="btDelete" ToolTip="{Binding NameBook}" Content="Удалить" BorderBrush="#095256" BorderThickness="2" FontFamily="Sylfaen" FontSize="30" Foreground="#6A0136" Background="#E2E8CE" Height="60" Width="200" Margin="90 0 0 0" Click="btDelete_Click"></Button>
+
+                                        </StackPanel>
+
+                                    </Border>
+                                </StackPanel>
+
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                
+            </Grid>
+
+        </ScrollViewer>
+        <StackPanel Margin="0,612,0,0" Orientation="Horizontal">
+            <TextBlock Text="Итоговая стоимость " FontFamily="Sylfaen" FontWeight="Black" TextAlignment="Center" VerticalAlignment="Center" FontSize="35"  Foreground="#6A0136" Height="60" Margin="20 0 0 0" TextWrapping="Wrap"></TextBlock>
+            <TextBlock x:Name="tblTotalPrice" FontFamily="Sylfaen" FontWeight="Black" TextAlignment="Center" VerticalAlignment="Center" FontSize="35"  Foreground="#6A0136"  Height="60" TextWrapping="Wrap" Margin="20 0 0 0" Width="300"></TextBlock>
+            <Button x:Name="btToOrder" BorderBrush="#095256" BorderThickness="2" FontWeight="Black" FontFamily="Sylfaen" FontSize="45" Foreground="#6A0136" Height="80" Width="500" Background="#E2E8CE" Content="Оформить заказ" Margin="10,0,0,0" Click="btToOrder_Click"/>
+        </StackPanel>
+        <!--<ItemsControl ItemsSource="{Binding Baskets}" x:Name="PriceBasketListView"  BorderThickness="2" Margin="0,622,0,0" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>-->
+
+
+
+        <!--<Button Content="-" Height="50" Width="50" BorderBrush="#095256" BorderThickness="2" Padding="0 0 0 3" Grid.Column="6" Grid.Row="1" FontWeight="Bold" FontFamily="Sylfaen" FontSize="25" Foreground="#6A0136" Background="#E2E8CE"></Button>
+                    <TextBox FontFamily="Sylfaen" FontWeight="Bold"  TextAlignment="Center" Grid.Column="7" Margin="0 0 0 0" Padding="0 6 0 0" Grid.Row="1"  FontSize="25" Foreground="#6A0136" Height="50" Width="50" Text="1"></TextBox>
+                    <Button Content="+" Height="50" Width="50" BorderBrush="#095256" BorderThickness="2" Grid.Column="8" Padding="0 0 0 6" Grid.Row="1" FontWeight="Bold" HorizontalContentAlignment="Center" FontFamily="Sylfaen" FontSize="30" Foreground="#6A0136" Background="#E2E8CE"></Button>-->
+
+    </Grid>
+</Window>

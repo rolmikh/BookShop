@@ -1,0 +1,9 @@
+﻿<Application x:Class="Book_Shop_WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Book_Shop_WPF"
+             StartupUri="Catalog.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
